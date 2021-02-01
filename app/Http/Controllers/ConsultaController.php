@@ -36,7 +36,7 @@ class ConsultaController extends Controller
         return consulta::all();
     }
 
-    private function store($ciudad){
+    public function store($ciudad){
         $consulta = new consulta();
         $consulta->ciudad = $ciudad;
         $consulta->save();
