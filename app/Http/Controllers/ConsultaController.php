@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\consulta;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request as Psr7Request;
-use Illuminate\Http\Request;
+
 
 function request($city){
     $client = new Client();
@@ -26,7 +25,7 @@ class ConsultaController extends Controller
 {
     public function show($ciudad){
 
-        $this->store($ciudad);
+        //$this->store($ciudad);
 
         return request($ciudad);
 
