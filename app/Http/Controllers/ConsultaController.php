@@ -21,7 +21,7 @@ function request($city){
     } catch (ClientException $e) {
         $response = $e->getResponse();
         $responseBodyAsString = $response->getBody()->getContents();
-        echo $responseBodyAsString;
+        return $responseBodyAsString;
     }
     $res = json_decode($res->getBody()->getContents());
     $res = json_decode(json_encode($res), true);
