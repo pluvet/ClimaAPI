@@ -4,18 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Consulta;
 use GuzzleHttp\Client;
-
+use GuzzleHttp\Exception\ClientException;
 
 function request($city){
     $client = new Client();
 
     $authorization = env('TOKEN', '');
     $client = new Client();
-    $res = $client->get("http://api.openweathermap.org/data/2.5/weather?q=$city&appid=$authorization", [
-        'headers' => [
-        'Content-type' =>  'application/json'
-        ]
-    ]);
+
+    try {
+        $res = $client->get("http://api.openweathermap.org/data/2.5/weather?q=$city&appid=$authorization", [
+            'headers' => [
+            'Content-type' =>  'application/json'
+            ]
+        ]);
+    } catch (ClientException $e) {
+        $response = $e->getResponse();
+        $responseBodyAsString = $response->getBody()->getContents();
+        echo $responseBodyAsString;
+    }
     $res = json_decode($res->getBody()->getContents());
     $res = json_decode(json_encode($res), true);
     return $res;
