@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\consulta;
+use App\Models\Consulta;
 use GuzzleHttp\Client;
 
 
@@ -25,18 +25,18 @@ class ConsultaController extends Controller
 {
     public function show($ciudad){
 
-        //$this->store($ciudad);
+        $this->store($ciudad);
 
         return request($ciudad);
 
     }
 
     public function index(){
-        return consulta::all();
+        return Consulta::all();
     }
 
     public function store($ciudad){
-        $consulta = new consulta();
+        $consulta = new Consulta();
         $consulta->ciudad = $ciudad;
         $consulta->save();
     }
